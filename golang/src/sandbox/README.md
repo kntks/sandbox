@@ -11,6 +11,9 @@ BenchmarkCase3-3   	       1	1013625000 ns/op	     176 B/op	       2 allocs/op
 
 ## gin server with Jwt
 
+### strat 
+`go run cum/server/main.go`
+
 `curl -H "Authorization: Bearer <token>" http://localhost:8080/user`
 
 
