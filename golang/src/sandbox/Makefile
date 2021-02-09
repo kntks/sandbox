@@ -1,11 +1,13 @@
 
 .PHONY: fmt start build test clean
 
+
 build:
 	echo "compile"
 
+DIR=cmd/server
 start:
-	reflex -r '(\.go$$|go\.mod)' -s go run main.go
+	reflex -r '(\.go$$|go\.mod)' -s go run $(DIR)/main.go
 
 test:
 	go test ./... -coverprofile cover.out
