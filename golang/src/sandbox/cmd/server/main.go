@@ -1,9 +1,11 @@
 package main
 
 import (
-	"sandbox/server"
+	_ "sandbox/server"
+	"sandbox/server/simple"
 )
 
 func main() {
-	server.Start()
+	//server.Start()
+	simple.SimpleServer{}.Start()
 }

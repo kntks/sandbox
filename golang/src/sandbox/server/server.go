@@ -70,7 +70,5 @@ func Start() {
 		ReadTimeout:       time.Minute,
 		ReadHeaderTimeout: time.Minute,
 	}
-	if err := server.ListenAndServe(); err != nil {
-		log.Fatal(err)
-	}
+	log.Fatal(server.ListenAndServe())
 }
