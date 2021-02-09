@@ -1,5 +1,10 @@
 # sandbox
 
+## Usage
+1, vscodeで`sandbox/golang`ディレクトリをルートとしてプロジェクトをオープンする
+2, `command + shift + p`でコマンドパレットを開く
+3, `ReOpen in Container`で開く
+
 ## concurrency package
 
 ```A
