@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  fluentd:
+    build: .
+    volumes: 
+      - type: bind
+        source: ./fluentd
+        target: /fluentd
+    env_file: .env
+    ports:
+      - "24224:24224"
