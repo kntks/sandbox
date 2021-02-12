@@ -1,0 +1,18 @@
+version: '3.8'
+
+services: 
+  squid:
+    image: sameersbn/squid:3.5.27-2
+    stop_signal: SIGINT
+    volumes:
+      - type: bind
+        source: ./cache
+        target: /var/spool/squid
+      - type: bind
+        source: ./log
+        target: /var/log/squid
+      - type: bind
+        source: ./squid.conf
+        target: /etc/squid/squid.conf 
+    ports:
+      - "3128:3128"
