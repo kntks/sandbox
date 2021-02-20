@@ -6,7 +6,7 @@ services:
     tty: true
     volumes:
       - type: bind
-        source: ./src
+        source: ./
         target: /go/src
     environment: 
       - GO111MODULE=on
