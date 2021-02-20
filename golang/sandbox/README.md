@@ -19,9 +19,8 @@ BenchmarkCase3-3   	       1	1013625000 ns/op	     176 B/op	       2 allocs/op
 goos: linux
 goarch: amd64
 pkg: sandbox/client
-BenchmarkCase11-3   	     100	  11096744 ns/op	  268082 B/op	    1273 allocs/op
-BenchmarkCase12-3   	     100	  10929375 ns/op	  264285 B/op	    1269 allocs/op
-PASS
+BenchmarkCase11-3   	     279	   4252352 ns/op	  135790 B/op	    1002 allocs/op
+BenchmarkCase12-3   	     244	   4540078 ns/op	  136554 B/op	    1013 allocs/op
 ```
 
 ## gin server with Jwt

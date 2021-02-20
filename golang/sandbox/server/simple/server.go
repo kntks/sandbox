@@ -16,6 +16,7 @@ type SimpleServer struct{}
 
 func ok(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
+	time.Sleep(200 * time.Millisecond)
 	w.Write([]byte(`{result: ok}`))
 }
 
