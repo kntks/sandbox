@@ -1,0 +1,21 @@
+version: "3.8"
+
+services: 
+  sandbox:
+    build: .
+    tty: true
+    volumes:
+      - type: bind
+        source: ./
+        target: /go/src
+    environment: 
+      - GO111MODULE=on
+    ports:
+      - "8000-8100:8000-8100"
+
+  redis:
+    image: "redis:latest"
+    volumes:
+      - "./data/redis:/data"
+    ports:
+      - "6379:6379"
