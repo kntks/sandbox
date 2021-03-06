@@ -12,9 +12,9 @@ type Redis struct {
 	client *redis.Client
 }
 
-func NewRedis() (*Redis, error) {
+func NewRedis(addr string) (*Redis, error) {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "redis:6379",
+		Addr:     addr,
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})

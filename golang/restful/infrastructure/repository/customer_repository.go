@@ -16,8 +16,8 @@ type CustomerRepository struct {
 	kvs *kvs.Redis
 }
 
-func NewCustomerRepository() (*CustomerRepository, error) {
-	db, err := kvs.NewRedis()
+func NewCustomerRepository(addr string) (*CustomerRepository, error) {
+	db, err := kvs.NewRedis(addr)
 	if err != nil {
 		return nil, xerrors.Errorf("fail to create customerRepository : %w", err)
 	}
