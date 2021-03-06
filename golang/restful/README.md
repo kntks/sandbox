@@ -3,7 +3,6 @@
 Clean Archtecture & レイヤーごとの単体テストを勉強するためのディレクトリ
 
 ## API
-
 ### Create
 ```bash
 curl -X POST -d '{"firstname": "hoge", "lastname":"aaa"}'  http://localhost:8000/create
