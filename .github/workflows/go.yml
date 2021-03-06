@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'golang/restful/*.go'
+      - 'golang/restful/**.go'
   pull_request:
     branches: [ main ]
 
