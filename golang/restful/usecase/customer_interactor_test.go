@@ -48,6 +48,7 @@ func TestCreate(t *testing.T) {
 			want:  domain.Name{First: "firstname", Last: "lastname"},
 		},
 	}
+
 	repo := NewCustomerInteractor(testRepo{})
 	for _, tc := range testcases {
 		t.Run(tc.name, func(t *testing.T) {
