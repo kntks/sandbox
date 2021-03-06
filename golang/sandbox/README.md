@@ -23,6 +23,33 @@ BenchmarkCase11-3   	     279	   4252352 ns/op	  135790 B/op	    1002 allocs/op
 BenchmarkCase12-3   	     244	   4540078 ns/op	  136554 B/op	    1013 allocs/op
 ```
 
+##  mutex package
+
+sync.RWMutexを `Lock()`, `UnLock()`でラップしている[RWMutex.RLocker](https://golang.org/pkg/sync/#RWMutex.RLocker)がある  
+これは[Locker](https://golang.org/pkg/sync/#Locker)を実装している
+
+```go
+type Locker interface {
+    Lock()
+    Unlock()
+}
+```
+
+コード自体は LockとUnLockをcallしているだけだがbenchmarkを取ると差が出ていることがわかる  
+readするだけならRWLockを使った方が良い
+```
+goos: linux
+goarch: amd64
+pkg: sandbox/mutex
+BenchmarkMyMutex-3     	  208287	      5438 ns/op	     532 B/op	       2 allocs/op
+BenchmarkMyRWMutex-3   	 1000000	      1640 ns/op	      25 B/op	       0 allocs/op
+PASS
+```
+
+```bash
+go run cmd/mutex/main.go 
+```
+
 ## gin server with Jwt
 
 ### start
