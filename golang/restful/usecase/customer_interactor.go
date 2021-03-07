@@ -15,8 +15,8 @@ type CustomerInputBoundary interface {
 }
 
 type CustomerInputData struct {
-	FirstName string `validate:"min=10,max=15"`
-	LastName  string `validate:"min=10,max=15"`
+	FirstName string `validate:"min=1,max=15"`
+	LastName  string `validate:"min=1,max=15"`
 }
 
 type CustomerInteractor struct {
