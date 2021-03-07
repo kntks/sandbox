@@ -62,3 +62,57 @@ func TestCreate(t *testing.T) {
 		})
 	}
 }
+
+func TestRead(t *testing.T) {
+	testcases := []struct {
+		name string
+		id   string
+		want domain.Customer
+	}{
+		{
+			name: "指定したダミーデータを適切に取得できる",
+			id:   "test",
+			want: domain.Customer{ID: "test", Name: domain.Name{First: "test1", Last: "test2"}},
+		},
+	}
+
+	repo := NewCustomerInteractor(testRepo{})
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := repo.Read(tc.id)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !reflect.DeepEqual(tc.want, *got) {
+				t.Errorf("\nwant: %v\ngot: %v\n", tc.want, *got)
+			}
+		})
+	}
+}
+
+func TestUpdate(t *testing.T) {
+	testcases := []struct {
+		name string
+		id   string
+		want domain.Customer
+	}{
+		{
+			name: "指定したダミーデータを適切に取得できる",
+			id:   "test",
+			want: domain.Customer{ID: "test", Name: domain.Name{First: "test1", Last: "test2"}},
+		},
+	}
+
+	repo := NewCustomerInteractor(testRepo{})
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := repo.Read(tc.id)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !reflect.DeepEqual(tc.want, *got) {
+				t.Errorf("\nwant: %v\ngot: %v\n", tc.want, *got)
+			}
+		})
+	}
+}

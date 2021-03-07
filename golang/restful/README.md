@@ -1,6 +1,5 @@
 # restful
 [![Go](https://github.com/kntks/sandbox/actions/workflows/go.yml/badge.svg)](https://github.com/kntks/sandbox/actions/workflows/go.yml)
-
 [![codecov](https://codecov.io/gh/kntks/sandbox/branch/main/graph/badge.svg?token=9ZS9IV1C69)](https://codecov.io/gh/kntks/sandbox)
 
 Clean Archtecture & レイヤーごとの単体テストを勉強するためのディレクトリ
