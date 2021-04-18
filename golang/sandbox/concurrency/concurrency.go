@@ -6,10 +6,6 @@ import (
 	"time"
 )
 
-// start := time.Now()
-// end := time.Now()
-// fmt.Printf("%f秒\n", (end.Sub(start)).Seconds())
-
 // forの中にgo routineを10個立てる
 // wait groupのみで制御
 func Case1() {

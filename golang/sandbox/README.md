@@ -14,6 +14,15 @@ BenchmarkCase2-3   	       3	 405691233 ns/op	    1072 B/op	      13 allocs/op
 BenchmarkCase3-3   	       1	1013625000 ns/op	     176 B/op	       2 allocs/op
 ```
 
+### pipeline channelとSlice
+
+https://blog.golang.org/pipelines
+```
+/go/src # go run cmd/concurrent/main.go 
+sliece:  1.5071818s
+pipeline:  30.8µs
+```
+
 ## client package
 ```bash
 goos: linux
