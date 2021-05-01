@@ -76,6 +76,34 @@ go run cmd/mutex/main.go
 
 ```
 docker compose exec db bash
-root@51e66cf1c1d3:/# mysql -uroot -pdocker
+root@51e66cf1c1d3:/# mysql -uroot -proot
 ```
 
+## users
+
+```
+mysql> select user from user;
++------------------+
+| user             |
++------------------+
+| docker           |
+| root             |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+6 rows in set (0.02 sec)
+```
+
+```
+mysql> show grants for docker@'%';
++------------------------------------------------------------+
+| Grants for docker@%                                        |
++------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `docker`@`%`                         |
+| GRANT ALL PRIVILEGES ON `test\_database`.* TO `docker`@`%` |
++------------------------------------------------------------+
+2 rows in set (0.01 sec)
+
+```
