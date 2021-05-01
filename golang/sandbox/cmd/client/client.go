@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"sandbox/client"
 	"sync"
 	"time"
 )
 
-func main() {
-
+func httpStats() {
 	wg := sync.WaitGroup{}
 	client := client.NewClient()
 	loopNum := 5000
 
 	wg.Add(loopNum)
+	// go run cmd/server/main.go
 	url := "http://localhost:8081/200"
 	start := time.Now()
 	for i := 0; i < loopNum; i++ {
@@ -25,7 +26,20 @@ func main() {
 		}(i)
 	}
 	wg.Wait()
-	end := time.Now()
-	fmt.Printf("%f秒\n", (end.Sub(start)).Seconds())
+	fmt.Printf("%f秒\n", time.Since(start).Seconds())
+}
 
+func customExponentialBackoff() {
+	url := "http://localhost:8081/5xx"
+	maxRetry := 3
+	result, err := client.Get(url, maxRetry, client.RetryDelayGenerator(uint(maxRetry)))
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf(" %+v \n", string(result.Body))
+}
+
+func main() {
+	url := "http://localhost:8081/4xx"
+	client.ExampleExponential(url, 4)
 }
