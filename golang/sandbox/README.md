@@ -70,3 +70,12 @@ go run cmd/mutex/main.go
 ## generate rpa pem key
 
 `go run cmd/rsa/main.go`
+
+
+# into mysql
+
+```
+docker compose exec db bash
+root@51e66cf1c1d3:/# mysql -uroot -pdocker
+```
+

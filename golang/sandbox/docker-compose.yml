@@ -11,7 +11,7 @@ services:
     environment: 
       - GO111MODULE=on
     ports:
-      - "8000-8100:8000-8100"
+      - "8000-8010:8000-8010"
 
   redis:
     image: "redis:latest"
@@ -19,3 +19,20 @@ services:
       - "./data/redis:/data"
     ports:
       - "6379:6379"
+
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ./db/data:/var/lib/mysql
+    - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+    - 3306:3306
