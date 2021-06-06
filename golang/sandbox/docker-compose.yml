@@ -36,3 +36,14 @@ services:
     - ./db/sql:/docker-entrypoint-initdb.d
     ports:
     - 3306:3306
+
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./es/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
