@@ -16,6 +16,8 @@ require (
 	github.com/tcnksm/go-httpstat v0.2.0
 	github.com/ugorji/go v1.2.5 // indirect
 	go.uber.org/goleak v1.1.10
+	go.uber.org/multierr v1.7.0 // indirect
+	go.uber.org/zap v1.17.0 // indirect
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
 	golang.org/x/sys v0.0.0-20210426230700-d19ff857e887 // indirect
