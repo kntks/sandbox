@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"sandbox/protobuf"
+)
 
 func main() {
-	fmt.Println("grpc package")
+	fmt.Println(protobuf.Person{})
 }
