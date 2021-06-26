@@ -1,11 +1,25 @@
 package main
 
 import (
-	"fmt"
-
-	"sandbox/protobuf"
+	"flag"
+	"log"
+	"sandbox/grpc/client"
+	"sandbox/grpc/server"
 )
 
 func main() {
-	fmt.Println(protobuf.Person{})
+	clientFlag := flag.Bool("c", false, "execute code as client")
+	serverFlag := flag.Bool("s", false, "execute code as server")
+
+	flag.Parse()
+
+	if *clientFlag && *serverFlag {
+		log.Fatal("flag option either -c or -s")
+	}
+	if *clientFlag {
+		client.Run()
+	}
+	if *serverFlag {
+		server.Run()
+	}
 }
