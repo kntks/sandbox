@@ -107,3 +107,18 @@ mysql> show grants for docker@'%';
 2 rows in set (0.01 sec)
 
 ```
+
+## protobuf package
+
+build docker image
+```
+$ pwd
+<path>/sandbox/golang/sandbox # current directory
+
+$ docker build --tag protobuf `pwd`/protobuf/
+```
+
+generate code
+```
+$ ./protobuf/make.sh 
+```
