@@ -6,6 +6,7 @@ option go_package = "github.com/kntks/sandbox/golang/sandbox/protobuf";
 
 service Hoge {
   rpc AtoB (AA) returns (BB) {}
+  rpc AtoBstream (stream AA) returns (stream BB) {}
 }
 
 message AA {

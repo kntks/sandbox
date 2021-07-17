@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HogeClient interface {
 	AtoB(ctx context.Context, in *AA, opts ...grpc.CallOption) (*BB, error)
+	AtoBstream(ctx context.Context, opts ...grpc.CallOption) (Hoge_AtoBstreamClient, error)
 }
 
 type hogeClient struct {
@@ -38,11 +39,43 @@ func (c *hogeClient) AtoB(ctx context.Context, in *AA, opts ...grpc.CallOption) 
 	return out, nil
 }
 
+func (c *hogeClient) AtoBstream(ctx context.Context, opts ...grpc.CallOption) (Hoge_AtoBstreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Hoge_ServiceDesc.Streams[0], "/sample.Hoge/AtoBstream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &hogeAtoBstreamClient{stream}
+	return x, nil
+}
+
+type Hoge_AtoBstreamClient interface {
+	Send(*AA) error
+	Recv() (*BB, error)
+	grpc.ClientStream
+}
+
+type hogeAtoBstreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *hogeAtoBstreamClient) Send(m *AA) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *hogeAtoBstreamClient) Recv() (*BB, error) {
+	m := new(BB)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // HogeServer is the server API for Hoge service.
 // All implementations must embed UnimplementedHogeServer
 // for forward compatibility
 type HogeServer interface {
 	AtoB(context.Context, *AA) (*BB, error)
+	AtoBstream(Hoge_AtoBstreamServer) error
 	mustEmbedUnimplementedHogeServer()
 }
 
@@ -52,6 +85,9 @@ type UnimplementedHogeServer struct {
 
 func (UnimplementedHogeServer) AtoB(context.Context, *AA) (*BB, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AtoB not implemented")
+}
+func (UnimplementedHogeServer) AtoBstream(Hoge_AtoBstreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method AtoBstream not implemented")
 }
 func (UnimplementedHogeServer) mustEmbedUnimplementedHogeServer() {}
 
@@ -84,6 +120,32 @@ func _Hoge_AtoB_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Hoge_AtoBstream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(HogeServer).AtoBstream(&hogeAtoBstreamServer{stream})
+}
+
+type Hoge_AtoBstreamServer interface {
+	Send(*BB) error
+	Recv() (*AA, error)
+	grpc.ServerStream
+}
+
+type hogeAtoBstreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *hogeAtoBstreamServer) Send(m *BB) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *hogeAtoBstreamServer) Recv() (*AA, error) {
+	m := new(AA)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // Hoge_ServiceDesc is the grpc.ServiceDesc for Hoge service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -96,6 +158,13 @@ var Hoge_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Hoge_AtoB_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "AtoBstream",
+			Handler:       _Hoge_AtoBstream_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "sample.proto",
 }

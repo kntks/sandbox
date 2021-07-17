@@ -17,7 +17,8 @@ func main() {
 		log.Fatal("flag option either -c or -s")
 	}
 	if *clientFlag {
-		client.Run()
+		//client.Run()
+		client.Bidirectional()
 	}
 	if *serverFlag {
 		server.Run()

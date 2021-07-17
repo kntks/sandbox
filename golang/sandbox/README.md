@@ -122,3 +122,8 @@ generate code
 ```
 $ ./protobuf/make.sh 
 ```
+
+exec code 
+```
+go run cmd/grpc/main.go -c or -s
+```

@@ -2,6 +2,8 @@ package server
 
 import (
 	"context"
+	"fmt"
+	"io"
 	"log"
 	"net"
 	"sandbox/protobuf"
@@ -30,7 +32,25 @@ func (h Hoge) AtoB(ctx context.Context, aa *protobuf.AA) (*protobuf.BB, error) {
 	}
 }
 
+func (h Hoge) AtoBstream(stream protobuf.Hoge_AtoBstreamServer) error {
+	for {
+		in, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			return err
+		}
+		fmt.Println("受取：", in.Name)
+
+		if err := stream.Send(&protobuf.BB{Name: "server B"}); err != nil {
+			return err
+		}
+	}
+}
+
 func Run() {
+	fmt.Println("server start listen 0:9000")
 	lis, err := net.Listen("tcp", ":9000")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
