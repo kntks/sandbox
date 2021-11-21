@@ -35,7 +35,7 @@ async def list_all_projects(organization: str = None):
     return all_projects
 
 bq_client = bigquery.Client()
-
+import itertools
 # https://googleapis.dev/python/bigquery/latest/generated/google.cloud.bigquery.dataset.DatasetListItem.html#google.cloud.bigquery.dataset.DatasetListItem
 # https://googleapis.dev/python/bigquery/latest/generated/google.cloud.bigquery.dataset.Dataset.html#google.cloud.bigquery.dataset.Dataset
 async def list_datasets(project: str = None):
@@ -48,7 +48,7 @@ async def list_datasets(project: str = None):
 async def print_datasets(project_list):
     tasks = [asyncio.create_task(list_datasets(p["project_id"])) for p in project_list]
     result = await asyncio.gather(*tasks)
-    print(result)
+    print(list(itertools.chain.from_iterable(result)))
 
 async def main():
     project_list = await list_all_projects("organizations/1045933413058")
