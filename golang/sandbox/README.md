@@ -127,3 +127,14 @@ exec code
 ```
 go run cmd/grpc/main.go -c or -s
 ```
+
+## gcp package
+
+### resourcemanager
+```
+$ gcloud organizations list      
+DISPLAY_NAME                 ID  DIRECTORY_CUSTOMER_ID
+xxxx                        yyy                    zzz
+
+$ go run cmd/gcp/main.go -org yyy
+```
