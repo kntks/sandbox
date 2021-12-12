@@ -11,7 +11,7 @@ import (
 )
 
 // https://pkg.go.dev/cloud.google.com/go/resourcemanager@v1.0.0/apiv3#FoldersClient.ListFolders
-func Main(orgID string) {
+func MainResourceManager(orgID string) {
 	ctx := context.Background()
 	c, err := resourcemanager.NewFoldersClient(ctx)
 	if err != nil {
