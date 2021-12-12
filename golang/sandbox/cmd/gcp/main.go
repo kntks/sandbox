@@ -8,5 +8,6 @@ import (
 func main() {
 	orgID := flag.String("org", "", "input organization id")
 	flag.Parse()
-	gcp.Main(*orgID)
+	// gcp.MainResourceManager(*orgID)
+	gcp.MainScc(*orgID)
 }

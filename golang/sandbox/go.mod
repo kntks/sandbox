@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	cloud.google.com/go/resourcemanager v1.0.0 // indirect
+	cloud.google.com/go/securitycenter v1.1.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/elastic/go-elasticsearch/v8 v8.0.0-20210607151234-d142457ce363
