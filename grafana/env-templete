@@ -1,0 +1,5 @@
+GF_AWS_PROFILES=defalt
+GF_AWS_default_ACCESS_KEY_ID=
+GF_AWS_default_SECRET_ACCESS_KEY=
+GF_AWS_default_REGION=ap-northeast-1
+GF_SECURITY_ADMIN_PASSWORD=admin

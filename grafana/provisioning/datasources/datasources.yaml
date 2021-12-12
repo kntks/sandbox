@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+- name: CloudWatch
+  type: cloudwatch
+  updateIntervalSeconds: 10
+  jsonData:
+    authType: keys
+    defaultRegion: $GF_AWS_default_REGION
+  secureJsonData:
+    accessKey: $GF_AWS_default_ACCESS_KEY_ID
+    secretKey: $GF_AWS_default_SECRET_ACCESS_KEY

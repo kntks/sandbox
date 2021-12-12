@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana:8.2.6
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: ./provisioning/datasources
+        target: /etc/grafana/provisioning/datasources
+      - type: bind
+        source: ./provisioning/dashboards
+        target: /etc/grafana/provisioning/dashboards
+      - type: bind
+        source: ./dashboards
+        target: /var/lib/grafana/dashboards/default
