@@ -9,3 +9,9 @@ datasources:
   secureJsonData:
     accessKey: $GF_AWS_default_ACCESS_KEY_ID
     secretKey: $GF_AWS_default_SECRET_ACCESS_KEY
+- name: Loki
+  type: loki
+  access: proxy
+  url: http://localhost:3100
+  jsonData:
+    maxLines: 1000
