@@ -1,42 +1,46 @@
 package main
 
-import (
-	"constraints"
-	"fmt"
-)
+import "fmt"
 
-func sum[K constraints.Ordered, T []K](m T) K {
-	var sum K
-	for _, x := range m {
-		sum += x
+type A struct {
+	hoge string
+}
+
+func (a A) Hoge() string {
+	return a.hoge
+}
+
+type B struct {
+	hoge string
+}
+
+func (b B) Hoge() string {
+	return b.hoge
+}
+
+func Print[T A | B](x T) {
+	switch (interface{})(x).(type) {
+	case A:
+		fmt.Println("a is ", x)
+	case B:
+		fmt.Println("b is ", x)
 	}
-	return sum
 }
 
-func some[K constraints.Ordered](list []K, f func(K) bool) bool {
-	for _, x := range list {
-		if f(x) {
-			return true
-		}
+func Print1[T string | int](x T) {
+	switch (interface{})(x).(type) {
+	case string:
+		fmt.Println("arg is string", x)
+	case int:
+		fmt.Println("arg is integer", x)
 	}
-	return false
-}
-
-type Number interface {
-	constraints.Integer | constraints.Float
-}
-
-func sum2[K Number, T []K](list T) K {
-	return sum[K](list)
 }
 
 func main() {
-	fmt.Println(sum([]int{1, 2, 3}))
-	fmt.Println(sum([]string{"a", "b"}))
+	// Example1()
+	Print(A{hoge: "AAA"})
+	Print(B{hoge: "BBB"})
 
-	// error: string does not implement Number
-	// fmt.Println(sum2([]string{"a", "b"}))
-	fmt.Println(sum2([]float64{1.2, 3.4}))
-
-	fmt.Println(some([]int{1, 3, 4}, func(x int) bool { return x%2 == 0 }))
+	Print1("a")
+	Print1(1)
 }
