@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"constraints"
+	"fmt"
+	"math"
+	"regexp"
+	"strconv"
+)
 
 type A struct {
 	hoge string
@@ -36,11 +42,68 @@ func Print1[T string | int](x T) {
 	}
 }
 
+func Filter[K constraints.Ordered](list []K, f func(K) bool) []K {
+	result := make([]K, 0, len(list))
+	for _, x := range list {
+		if f(x) {
+			result = append(result, x)
+		}
+	}
+	return result
+}
+
+func Example_Filter() {
+	fmt.Println("=====  Filter example1 ========")
+	input1 := []int{1, 2, 3, 4}
+	output1 := Filter(input1, func(n int) bool {
+		return n%2 == 0
+	})
+	fmt.Printf("input: %#v\n", input1)
+	fmt.Printf("output: %#v\n", output1)
+
+	fmt.Println("=====  Filter example2 ========")
+	re := regexp.MustCompile(`^1_`)
+	input2 := []string{"1_1", "1_2", "2_3", "2_4"}
+	output2 := Filter(input2, re.MatchString)
+	fmt.Printf("input: %#v\n", input2)
+	fmt.Printf("output: %#v\n", output2)
+}
+
+func Map[K, T any](list []K, f func(K) T) []T {
+	result := make([]T, 0, len(list))
+	for _, x := range list {
+		result = append(result, f(x))
+	}
+	return result
+}
+
+func Example_Map() {
+	fmt.Println("=====  Map example1 ========")
+	input1 := []int{1, 2, 3, 4}
+	output1 := Map(input1, strconv.Itoa)
+	fmt.Printf("input: %#v\n", input1)
+	fmt.Printf("output: %#v\n", output1)
+
+	type stuff struct {
+		price int
+	}
+
+	fmt.Println("=====  Map example2 ========")
+	input2 := []stuff{{price: 10}, {price: 20}, {price: 30}}
+	output2 := Map(input2, func(s stuff) stuff {
+		return stuff{price: int(math.Ceil(float64(s.price) * 1.5))}
+	})
+	fmt.Printf("input: %+v\n", input2)
+	fmt.Printf("output: %+v\n", output2)
+}
+
 func main() {
 	// Example1()
-	Print(A{hoge: "AAA"})
-	Print(B{hoge: "BBB"})
+	// Print(A{hoge: "AAA"})
+	// Print(B{hoge: "BBB"})
 
-	Print1("a")
-	Print1(1)
+	// Print1("a")
+	// Print1(1)
+	Example_Filter()
+	Example_Map()
 }
