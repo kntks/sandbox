@@ -3,13 +3,10 @@ version: "3.8"
 services: 
   sandbox:
     build: .
-    tty: true
     volumes:
       - type: bind
         source: ./
         target: /go/src
-    environment: 
-      - GO111MODULE=on
     ports:
       - "8000-8010:8000-8010"
 
@@ -22,6 +19,7 @@ services:
 
   db:
     image: mysql:8.0
+    platform: linux/x86_64
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
