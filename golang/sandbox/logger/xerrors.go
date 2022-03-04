@@ -1,8 +1,11 @@
 package logger
 
 import (
+	errs "errors"
 	"log"
 	"os"
+
+	"github.com/pkg/errors"
 
 	"golang.org/x/xerrors"
 )
@@ -22,4 +25,16 @@ func returnXError() error {
 func returnXError1() error {
 	err := returnXError()
 	return xerrors.Errorf("this is error1: %w", err)
+}
+
+func PkgErrorMain() {
+	log.Fatalf("%+v\n", returnPkgError1())
+}
+
+func returnPkgError1() error {
+	return returnPkgError()
+}
+
+func returnPkgError() error {
+	return errors.WithStack(errs.New("error"))
 }

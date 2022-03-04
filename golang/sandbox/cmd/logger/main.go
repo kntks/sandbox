@@ -1,13 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"sandbox/logger"
 )
 
 func main() {
-	logger.ZapProduction()
+	fmt.Println("zap production xerror")
+	//logger.ZapProductionXError()
 
-	logger.ZapDevelopment()
+	fmt.Println("zap development xerror")
+	//logger.ZapDevelopmentXError()
 
-	logger.XerrorsMain()
+	fmt.Println("zap development error")
+	//logger.ZapDevelopmentError()
+
+	fmt.Println("zap xerrors")
+	//logger.XerrorsMain()
+
+	fmt.Println("pkg error")
+	logger.PkgErrorMain()
 }
