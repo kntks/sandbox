@@ -11,8 +11,10 @@ require (
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-playground/validator/v10 v10.6.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
+	github.com/magefile/mage v1.12.1
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/pkg/errors v0.8.1
 	github.com/spf13/cobra v1.2.1
 	github.com/tcnksm/go-httpstat v0.2.0
 	github.com/ugorji/go v1.2.6 // indirect
