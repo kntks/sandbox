@@ -1,0 +1,17 @@
+syntax = "proto3";
+package sample;
+
+option go_package = "github.com/kntks/sandbox/golang/grpc/protobuf";
+
+service Hoge {
+  rpc AtoB (AA) returns (BB) {}
+  rpc AtoBstream (stream AA) returns (stream BB) {}
+}
+
+message AA {
+  string name = 1;
+}
+
+message BB {
+  string name = 1;
+}
