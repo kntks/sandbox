@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "build": "npm run noemit && node ./scripts/build.js",
+    "test": "tsc",
+    "noemit": "tsc --noEmit"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.27",
+    "dayjs": "^1.11.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}
