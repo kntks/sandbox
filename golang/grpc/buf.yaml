@@ -1,0 +1,18 @@
+version: v1
+name: buf.build/yourorg/myprotos
+deps:
+  - buf.build/googleapis/googleapis
+breaking:
+  use:
+    - FILE
+  # https://docs.buf.build/tour/lint-your-api#lint-exceptions
+  # except:
+  #   - PACKAGE_VERSION_SUFFIX
+  #   - FIELD_LOWER_SNAKE_CASE
+  #   - SERVICE_SUFFIX
+  # https://docs.buf.build/tour/lint-your-api#ignore-lint-failures
+  # ignore:
+  #   - hoge/hoge.proto
+lint:
+  use:
+    - DEFAULT
