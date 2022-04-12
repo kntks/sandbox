@@ -27,4 +27,8 @@ schema_config:
         period: 24h
 
 ruler:
-  alertmanager_url: http://localhost:9093
+  storage:
+    type: local
+    local:
+      directory: /etc/loki/rules
+  alertmanager_url: http://alertmanager:9093
