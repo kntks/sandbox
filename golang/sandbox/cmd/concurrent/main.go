@@ -14,6 +14,8 @@ func main() {
 	GeneratorMain()
 }
 
+// http://tmrts.com/go-patterns/concurrency/generator.html
+// https://blog.web-apps.tech/generator-pattern/
 func GeneratorMain() {
 	for v := range generators(context.Background()) {
 		fmt.Println("処理中", v)
