@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  temp:
+    build:
+      context: . 
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/go/src"
+    command: ["air", "-c", ".air.toml"]
+    
