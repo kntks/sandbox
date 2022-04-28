@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  app:
+    image: node:18.0.0-alpine3.14
+    volumes:
+      - "./:/app"
+    working_dir: /app
+    command: ["npm", "start"]
+    ports:
+      - "3000:3000"
+  db:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:  
+      - './data:/var/lib/mysql'
