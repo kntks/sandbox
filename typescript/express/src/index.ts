@@ -33,3 +33,12 @@ const users: User[] = [
 app.get("/users", (req: express.Request, res: express.Response) => {
   res.send(JSON.stringify(users));
 });
+
+import { PrismaClient } from '@prisma/client';
+
+app.get("/", async (req: express.Request, res: express.Response) => {
+  const prisma = new PrismaClient();
+  const allUsers = await prisma.user.findMany()
+  console.log(allUsers)
+  res.send(JSON.stringify(allUsers))
+})
