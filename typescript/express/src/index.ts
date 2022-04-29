@@ -12,21 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 //   }
 // );
 
+import { getAllUserHandler, createUserHandler } from "./handlers/user";
+
+app.get("/users", getAllUserHandler);
+
+app.post("/create", createUserHandler);
+
 app.listen(3000, () => {
   console.log("Start on port 3000.");
-});
-
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
-app.get("/users", async (req: express.Request, res: express.Response) => {
-  const allUsers = await prisma.user.findMany();
-  console.log(allUsers);
-  res.send(JSON.stringify(allUsers));
-});
-
-app.post("/create", async (req: express.Request, res: express.Response) => {
-  console.log("req.body", req.body);
-  const user = await prisma.user.create({ data: req.body });
-  res.send(JSON.stringify(user));
 });
