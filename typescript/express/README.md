@@ -13,9 +13,16 @@ $ npx prisma init
 
 ## 環境構築
 
+.envファイルをテンプレートからコピーして編集する
+```
+$ cp env-template .env
+```
+
+以下のコマンドを順番に入力する
 ```
 $ docker compose run --rm app npm ci
 $ docker compose up 
+$ docker compose run --rm app npx prisma migrate dev --name init
 ```
 
 # trouble shooting
@@ -66,6 +73,11 @@ mysql> select user,host,plugin from mysql.user;
 +------------------+-----------+-----------------------+
 6 rows in set (0.01 sec)
 ```
+
+# メモ
+必要そう
+https://zenn.dev/nori_k/articles/45399999ff39f2#prisma-client%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B
+
 
 参考:
 - [expressの開発にTypeScriptを利用する](https://qiita.com/zaburo/items/69726cc42ef774990279)
