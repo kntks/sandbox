@@ -1,7 +1,9 @@
 version: '3.9'
 services:
   app:
-    image: node:18.0.0-alpine3.14
+    # 下のissueがcloseになるまでbullseyeを使用する
+    # https://github.com/prisma/prisma/issues/8478
+    image: node:18.0.0-bullseye 
     volumes:
       - "./:/app"
     working_dir: /app
