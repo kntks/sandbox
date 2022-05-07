@@ -1,5 +1,6 @@
 import { prisma } from "./prisma";
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
+import { PrismaClientKnownRequestError, PrismaClientValidationError } from "@prisma/client/runtime";
 
 export const getAllUserHandler = async (req: Request, res: Response) => {
   const allUsers = await prisma.user.findMany();
@@ -14,7 +15,15 @@ export const createUserHandler = async (req: Request, res: Response) => {
     res.status(200).send(JSON.stringify(user));
   } catch (e) {
     if (e instanceof Error) console.error(e);
+    
     // TODO: error typeごとにstatusコードを修正する
+    if(e instanceof PrismaClientKnownRequestError && e.code === "P2002") {
+      res.status(404).send("this user is already exists");
+      return 
+    }
+    if(e instanceof PrismaClientValidationError) {
+      res.status(404).send("There is a validation error");
+    }
     res.status(404).send("error");
   }
 };
