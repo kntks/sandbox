@@ -11,7 +11,9 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
   db:
     build:
       context: .
@@ -28,3 +30,7 @@ services:
       - ./mysql/cnf:/etc/mysql/conf.d
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 1s
+      retries: 3
