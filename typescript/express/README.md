@@ -29,6 +29,12 @@ $ docker compose run --rm app npx prisma migrate dev --name init
 - [expressの開発にTypeScriptを利用する](https://qiita.com/zaburo/items/69726cc42ef774990279)
 - [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-mysql)
 
+# 既存のスキーマをprismaに反映させる
+```
+$ docker compose exec app npx prisma db pull
+$ docker compose exec app npx prisma generate
+```
+https://www.prisma.io/docs/concepts/components/introspection
 
 # prisma error handling
 - [Handling exceptions and errors](https://www.prisma.io/docs/concepts/components/prisma-client/handling-exceptions-and-errors)
