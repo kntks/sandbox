@@ -13,16 +13,17 @@ services:
     depends_on:
       - db
   db:
-    image: mysql:8.0-debian
-    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      # MYSQL_DATABASE: ${DB_DATABASE}
+      # MYSQL_USER: ${DB_USER}
+      # MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:  
       - ./mysql/data:/var/lib/mysql
-      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      # - ./mysql/initdb.d:/docker-entrypoint-initdb.d # test_dbを使用するので、今回は必要ない
       - ./mysql/log:/var/log/mysql
       - ./mysql/cnf:/etc/mysql/conf.d
     ports:

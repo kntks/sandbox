@@ -1,0 +1,7 @@
+FROM alpine:3.14 AS test_db
+RUN apk add git
+RUN git clone https://github.com/datacharmer/test_db.git
+
+FROM --platform=linux/x86_64 mysql:8.0-debian
+COPY --from=test_db /test_db/employees.sql /docker-entrypoint-initdb.d/
+COPY --from=test_db /test_db/* .
