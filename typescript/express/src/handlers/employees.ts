@@ -4,7 +4,9 @@ import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
 } from "@prisma/client/runtime";
-import { validationResult } from 'express-validator';
+import { validationResult } from "express-validator";
+
+import { departments } from "../const";
 
 export const getAllEmployeeHandler = async (req: Request, res: Response) => {
   const allEmployees = await prisma.employees.findMany();
@@ -15,15 +17,16 @@ export const getAllEmployeeHandler = async (req: Request, res: Response) => {
 export const getDepartmentHandler = async (req: Request, res: Response) => {
   console.log("req.body", req.params);
   const errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    return res.status(404).json({errors: errors.array()});
+  if (!errors.isEmpty()) {
+    return res.status(404).json({ errors: errors.array() });
   }
 
   try {
     //SELECT * FROM dept_emp WHERE dept_no="d001" AND to_date>=now();
     const employee = await prisma.dept_emp.findMany({
       where: {
-        dept_no: req.params.department,
+        dept_no: departments.find((v) => v.dept_name === req.params.department)
+          ?.dept_no,
         to_date: {
           gte: new Date(),
         },
