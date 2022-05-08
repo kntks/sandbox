@@ -13,12 +13,15 @@ app.use(express.urlencoded({ extended: true }));
 //   }
 // );
 
-import { getAllEmployeeHandler, getDepartmentHandler } from "./handlers/user";
+import {
+  getAllEmployeeHandler,
+  getDepartmentHandler,
+} from "./handlers/employees";
 
 app.get("/employees", getAllEmployeeHandler);
 
 // 部署ごとにいる従業員の一覧
-app.get("/employees/:department", getDepartmentHandler)
+app.get("/employees/:department", getDepartmentHandler);
 
 // app.post("/create", createEmployeeHandler);
 

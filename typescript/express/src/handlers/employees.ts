@@ -1,6 +1,9 @@
 import { prisma } from "./prisma";
 import { Request, response, Response } from "express";
-import { PrismaClientKnownRequestError, PrismaClientValidationError } from "@prisma/client/runtime";
+import {
+  PrismaClientKnownRequestError,
+  PrismaClientValidationError,
+} from "@prisma/client/runtime";
 
 export const getAllEmployeeHandler = async (req: Request, res: Response) => {
   const allEmployees = await prisma.employees.findMany();
@@ -14,22 +17,22 @@ export const getDepartmentHandler = async (req: Request, res: Response) => {
     //SELECT * FROM dept_emp WHERE dept_no="d001" AND to_date>=now();
     const employee = await prisma.dept_emp.findMany({
       where: {
-        dept_no: req.params.dept_no,
+        dept_no: req.params.department,
         to_date: {
-          gte: new Date()
-        }
-      }
+          gte: new Date(),
+        },
+      },
     });
     res.status(200).send(JSON.stringify(employee));
   } catch (e) {
     if (e instanceof Error) console.error(e);
-    
+
     // TODO: error typeごとにstatusコードを修正する
-    if(e instanceof PrismaClientKnownRequestError && e.code === "P2002") {
+    if (e instanceof PrismaClientKnownRequestError && e.code === "P2002") {
       res.status(404).send("this employee is already exists");
-      return 
+      return;
     }
-    if(e instanceof PrismaClientValidationError) {
+    if (e instanceof PrismaClientValidationError) {
       res.status(404).send("There is a validation error");
     }
     res.status(404).send("error");
