@@ -4,6 +4,7 @@ import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
 } from "@prisma/client/runtime";
+import { validationResult } from 'express-validator';
 
 export const getAllEmployeeHandler = async (req: Request, res: Response) => {
   const allEmployees = await prisma.employees.findMany();
@@ -13,6 +14,11 @@ export const getAllEmployeeHandler = async (req: Request, res: Response) => {
 
 export const getDepartmentHandler = async (req: Request, res: Response) => {
   console.log("req.body", req.params);
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(404).json({errors: errors.array()});
+  }
+
   try {
     //SELECT * FROM dept_emp WHERE dept_no="d001" AND to_date>=now();
     const employee = await prisma.dept_emp.findMany({
@@ -29,11 +35,10 @@ export const getDepartmentHandler = async (req: Request, res: Response) => {
 
     // TODO: error typeごとにstatusコードを修正する
     if (e instanceof PrismaClientKnownRequestError && e.code === "P2002") {
-      res.status(404).send("this employee is already exists");
-      return;
+      return res.status(404).send("this employee is already exists");
     }
     if (e instanceof PrismaClientValidationError) {
-      res.status(404).send("There is a validation error");
+      return res.status(404).send("There is a validation error");
     }
     res.status(404).send("error");
   }

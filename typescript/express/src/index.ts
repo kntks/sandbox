@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 //     next();
 //   }
 // );
+import { param } from "express-validator";
 
 import {
   getAllEmployeeHandler,
@@ -20,8 +21,26 @@ import {
 
 app.get("/employees", getAllEmployeeHandler);
 
+const departments = [
+  "customer_service",
+  "development",
+  "finance",
+  "human_resources",
+  "marketing",
+  "production",
+  "quality_management",
+  "research",
+  "sales"
+] as const;
+
+type Department = typeof departments[number];
+
 // 部署ごとにいる従業員の一覧
-app.get("/employees/:department", getDepartmentHandler);
+app.get(
+  "/employees/:department",
+  param("department").isIn(departments),
+  getDepartmentHandler
+);
 
 // app.post("/create", createEmployeeHandler);
 
