@@ -1,5 +1,6 @@
 import express from "express";
 const app: express.Express = express();
+const router = express.Router();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -12,11 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 //   }
 // );
 
-import { getAllUserHandler, createUserHandler } from "./handlers/user";
+import { getAllEmployeeHandler, getDepartmentHandler } from "./handlers/user";
 
-app.get("/users", getAllUserHandler);
+app.get("/employees", getAllEmployeeHandler);
 
-app.post("/create", createUserHandler);
+// 部署ごとにいる従業員の一覧
+app.get("/employees/:department", getDepartmentHandler)
+
+// app.post("/create", createEmployeeHandler);
 
 app.listen(3000, () => {
   console.log("Start on port 3000.");
