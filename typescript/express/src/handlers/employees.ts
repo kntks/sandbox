@@ -15,7 +15,6 @@ export const getAllEmployeeHandler = async (req: Request, res: Response) => {
 };
 
 export const getDepartmentHandler = async (req: Request, res: Response) => {
-  console.log("req.body", req.params);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(404).json({ errors: errors.array() });
@@ -31,6 +30,15 @@ export const getDepartmentHandler = async (req: Request, res: Response) => {
           gte: new Date(),
         },
       },
+      select: {
+        emp_no: true,
+        employees: {
+          select: {
+            first_name: true,
+            last_name: true,
+          }
+        }
+      }
     });
     res.status(200).send(JSON.stringify(employee));
   } catch (e) {
