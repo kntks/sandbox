@@ -40,7 +40,7 @@ export const getDepartmentHandler = async (req: Request, res: Response) => {
         }
       }
     });
-    res.status(200).send(JSON.stringify(employee));
+    res.status(200).json(employee);
   } catch (e) {
     if (e instanceof Error) console.error(e);
 
