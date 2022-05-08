@@ -1,4 +1,4 @@
-# express　+ prisma
+# express + prisma
 
 ## 初期構築 メモ
 これは空のディレクトリから構築するときに入力したコマンド
@@ -29,6 +29,12 @@ $ docker compose run --rm app npx prisma migrate dev --name init
 - [expressの開発にTypeScriptを利用する](https://qiita.com/zaburo/items/69726cc42ef774990279)
 - [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-mysql)
 
+## user formatter
+
+```
+$ docker compose run --rm app npm run lint-fix
+```
+
 # 既存のスキーマをprismaに反映させる
 ```
 $ docker compose exec app npx prisma db pull
@@ -41,6 +47,19 @@ https://www.prisma.io/docs/concepts/components/introspection
 
 - [Errors reference](https://www.prisma.io/docs/reference/api-reference/error-reference)
 
+
+# reqest example
+
+## get users
+```
+$ curl localhost:3000/users
+[{"id":1,"email":"hoge@hoge.com","name":"hoge"}]
+```
+
+## create users
+```
+$ curl -X POST -H "Content-Type:application/json" localhost:3000/create -d '{"email": "hoge@hoge.com", "name": "hoge"}'
+```
 
 # trouble shooting
 
@@ -96,3 +115,6 @@ mysql> select user,host,plugin from mysql.user;
 https://zenn.dev/nori_k/articles/45399999ff39f2#prisma-client%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B
 
 
+## expressに関するサイト
+
+- [🤺 Node.js + Expressの混沌を統治する 🤺](https://inside.estie.co.jp/entry/2020/09/17/090000)
