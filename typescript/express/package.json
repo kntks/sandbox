@@ -2,9 +2,9 @@
   "name": "express",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node-dev --poll --exit-child --watch src src/index.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register --poll --exit-child --watch src src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint-fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'"
   },
@@ -22,6 +22,7 @@
     "prisma": "^3.13.0",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
