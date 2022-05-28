@@ -1,4 +1,4 @@
-import { prisma } from "./prisma";
+import { prisma } from "../handlers/prisma";
 import { Request, response, Response } from "express";
 import {
   PrismaClientKnownRequestError,
