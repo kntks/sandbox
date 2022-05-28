@@ -37,7 +37,12 @@ $ docker compose run --rm app npm run lint-fix
 
 # 既存のスキーマをprismaに反映させる
 ```
-$ docker compose exec app npx prisma db pull
+$ make pull 
+or 
+$ docker compose exec app npx prisma db pull 
+
+$ make genenrate
+or
 $ docker compose exec app npx prisma generate
 ```
 https://www.prisma.io/docs/concepts/components/introspection
