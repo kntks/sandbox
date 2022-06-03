@@ -1,0 +1,16 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true
+    },
+    "target": "es2020",
+    "keepClassNames": true,
+    "transform": {
+    }
+  },
+  "module": {
+    "type": "commonjs",
+    "noInterop": true
+  }
+}
