@@ -4,3 +4,5 @@ node_modules
 mysql/data
 mysql/initdb.d
 mysql/log
+
+dist
