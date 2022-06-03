@@ -10,6 +10,8 @@ services:
     command: ["npm", "start"]
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: "mysql://root:admin@db:3306/employees"
     depends_on:
       db:
         condition: service_healthy

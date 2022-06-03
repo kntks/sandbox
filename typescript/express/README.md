@@ -11,6 +11,24 @@ $ npm i -D ts-node-dev
 $ npx prisma init
 ```
 
+swc導入
+```
+npm install -D @swc/cli @swc/core
+```
+
+baseUrl, pathを設定してimport文を絶対パスで記述したいが、tscでトランスパイルするときにpathが解決されない
+```
+$ npm install --save-dev tsconfig-paths
+$ npm install --save-dev tsc-alias
+```
+以下のスクリプトを追加する
+```json
+"scripts": {
+  "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+}
+```
+
+
 ## 環境構築
 
 .envファイルをテンプレートからコピーして編集する
