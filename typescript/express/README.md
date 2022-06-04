@@ -33,6 +33,11 @@ swaggerでAPIドキュメント自動生成
 $ npm i -D swagger-ui-express swagger-jsdoc @types/swagger-jsdoc @types/swagger-ui-express
 ```
 
+jest 
+```
+$ npm i -D jest @types/jest @swc/core @swc/jest
+```
+
 ## 環境構築
 
 .envファイルをテンプレートからコピーして編集する

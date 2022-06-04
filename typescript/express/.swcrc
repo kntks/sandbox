@@ -8,6 +8,7 @@
     "transform": {
     }
   },
+  "sourceMaps": true,
   "module": {
     "type": "commonjs"
   }

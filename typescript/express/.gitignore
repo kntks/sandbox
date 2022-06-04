@@ -6,3 +6,4 @@ mysql/initdb.d
 mysql/log
 
 dist
+coverage
