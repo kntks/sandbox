@@ -28,6 +28,10 @@ $ npm install --save-dev tsc-alias
 }
 ```
 
+swaggerでAPIドキュメント自動生成
+``` 
+$ npm i -D swagger-ui-express swagger-jsdoc @types/swagger-jsdoc @types/swagger-ui-express
+```
 
 ## 環境構築
 

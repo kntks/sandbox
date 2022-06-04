@@ -13,6 +13,7 @@ services:
     init: true
     environment:
       DATABASE_URL: "mysql://root:admin@db:3306/employees"
+      NODE_ENV: dev
     depends_on:
       db:
         condition: service_healthy
