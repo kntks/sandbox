@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 //   }
 // );
 
-app.use("/employees", employees)
+app.use("/employees", employees);
 
 app.listen(3000, () => {
   console.log("Start on port 3000.");
