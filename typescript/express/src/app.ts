@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === "dev") {
         title: "Express TypeScript",
         version: "1.0.0",
       },
+      basePath: "/api/v1"
     },
     apis: ["src/routes/*"],
   };
