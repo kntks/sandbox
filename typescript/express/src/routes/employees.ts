@@ -68,7 +68,7 @@ router.get("/", ok);
  *            $ref: "#/definitions/Employees"
  */
 router.get(
-  "employees/:department",
+  "/employees/:department",
   param("department").isIn(DepartmentNames),
   getEmployeesController
 );
