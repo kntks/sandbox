@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { param } from "express-validator";
 
-import { ok, getDepartmentHandler } from "controllers/employees";
+import { ok, getEmployeesController } from "controllers/employees";
 import { DepartmentNames } from "const";
 import { errorHandler } from "middlewares/error";
 
@@ -36,7 +36,7 @@ router.get("/", ok);
 router.get(
   "/:department",
   param("department").isIn(DepartmentNames),
-  getDepartmentHandler
+  getEmployeesController
 );
 
 export default router;

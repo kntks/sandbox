@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 //     next();
 //   }
 // );
-const BASE_URL="/api/v1"
+const BASE_URL = "/api/v1";
 app.use(BASE_URL, employees);
 
 app.listen(3000, () => {
