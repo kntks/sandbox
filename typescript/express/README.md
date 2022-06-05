@@ -36,6 +36,7 @@ $ npm i -D swagger-ui-express swagger-jsdoc @types/swagger-jsdoc @types/swagger-
 jest 
 ```
 $ npm i -D jest @types/jest @swc/core @swc/jest
+$ npm i -D jest-mock-extended
 ```
 
 ## 環境構築

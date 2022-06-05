@@ -3,8 +3,7 @@ module.exports = {
     "<rootDir>/src"
   ],
   testMatch: [
-    "**/__tests__/**/*.+(ts|tsx|js)",
-    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    "**/__tests__/*.test.ts"
   ],
 
   testPathIgnorePatterns: [
@@ -14,6 +13,9 @@ module.exports = {
   // コンパイル対象外のフォルダーを指定
   transformIgnorePatterns: ["/node_modules/"],
 
+  setupFilesAfterEnv: ["<rootDir>/src/__tests__/singleton.ts"],
+
+  moduleDirectories: ["node_modules", "src"],
   transform: {
     ".+\\.(t|j)sx?$": [
       "@swc/jest",
