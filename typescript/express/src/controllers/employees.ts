@@ -1,4 +1,4 @@
-import { prisma } from "../handlers/prisma";
+import prisma from "models/client";
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { getEmployees } from "models/employees";
