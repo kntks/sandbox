@@ -27,7 +27,7 @@ export async function getEmployeesController(
   const { department } = req.params;
   try {
     //SELECT * FROM dept_emp WHERE dept_no="d001" AND to_date>=now();
-    const employees = await getEmployees(department)
+    const employees = await getEmployees(department);
     res.status(200).json(employees);
   } catch (e) {
     next(e);

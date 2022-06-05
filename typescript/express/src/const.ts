@@ -37,4 +37,4 @@ export const departments = [
   },
 ] as const;
 
-export const DepartmentNames = departments.map(({deptName})=> deptName)
+export const DepartmentNames = departments.map(({ deptName }) => deptName);

@@ -2,17 +2,23 @@
 
 import { Request } from "express";
 
-type GetEmployeesRequest<T> = Request<GetEmployeesRequestParam<T>, {}, {}, {}>
+type GetEmployeesRequest<T> = Request<
+  GetEmployeesRequestParam<T>,
+  unknown,
+  unknown,
+  Record<string, any> | undefined
+>;
 
 type GetEmployeesRequestParam<T> = {
-  department: DepartmentName<T>
-}
+  department: DepartmentName<T>;
+};
 
 type Department = {
-  no: string,
-  name: string
-}
-type DepartmentName<T extends ReadonlyArray<{deptName: string}>> = T[number]["deptName"]
+  no: string;
+  name: string;
+};
+type DepartmentName<T extends ReadonlyArray<{ deptName: string }>> =
+  T[number]["deptName"];
 
 type Employee = {
   empNo: number;

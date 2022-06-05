@@ -2,7 +2,6 @@ import prisma from "models/client";
 import { departments } from "const";
 import { DepartmentName, Employee } from "@types";
 
-
 export async function getEmployees(
   department: DepartmentName<typeof departments>
 ): Promise<Employee[]> {
