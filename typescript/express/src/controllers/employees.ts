@@ -5,6 +5,17 @@ import { getEmployees } from "models/employees";
 import { departments } from "const";
 import { DepartmentName, GetEmployeesRequest } from "@types";
 
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
+
 export async function ok(req: Request, res: Response) {
   return res.status(200).json("ok");
 }
@@ -31,5 +42,18 @@ export async function getEmployeesController(
     res.status(200).json(employees);
   } catch (e) {
     next(e);
+  }
+}
+
+
+@Route("employees")
+export class EmployeesController extends Controller {
+  @SuccessResponse("200", "OK")
+  @Get()
+  public async get(@Query() offset: number): Promise<{id: string, name: string}[]> {
+    return [{
+      id: "123",
+      name: "hoge"
+    }]
   }
 }

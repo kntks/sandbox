@@ -4,16 +4,17 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "npm run start:nodemon",
+    "start": "npm run tsoa && npm run start:nodemon",
     "start:node-dev": "ts-node-dev -r tsconfig-paths/register --poll --exit-child --watch src src/index.ts",
     "start:nodemon": "nodemon --watch src --ext ts --exec ts-node src/app.ts",
-    "dev": "nodemon dist/app.js",
+    "dev": "npm run tsoa && nodemon dist/app.js",
     "test": "jest --coverage --passWithNoTests --runInBand",
     "build:swc": "swc src -d dist && tsc-alias -p tsconfig.json",
     "build:tsc": "tsc --noEmitOnError -p tsconfig.json && tsc-alias -p tsconfig.json",
     "build": "npm run build:prisma && npm run build:swc",
     "build:prisma": "prisma migrate deploy",
-    "lint:fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'"
+    "lint:fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'",
+    "tsoa": "tsoa spec-and-routes"
   },
   "keywords": [],
   "author": "",
@@ -36,12 +37,12 @@
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "prisma": "^3.13.0",
-    "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
     "tsc-alias": "^1.6.8",
     "tsconfig-paths": "^4.0.0",
+    "tsoa": "^4.1.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
