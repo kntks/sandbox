@@ -11,7 +11,7 @@
     "test": "jest --coverage --passWithNoTests --runInBand",
     "build:swc": "swc src -d dist && tsc-alias -p tsconfig.json",
     "build:tsc": "tsc --noEmitOnError -p tsconfig.json && tsc-alias -p tsconfig.json",
-    "build": "npm run build:prisma && npm run build:swc",
+    "build": "npm run tsoa && npm run build:prisma && npm run build:swc",
     "build:prisma": "prisma migrate deploy",
     "lint:fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'",
     "tsoa": "tsoa spec-and-routes"

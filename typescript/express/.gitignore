@@ -7,4 +7,4 @@ mysql/log
 
 dist
 coverage
-.build
+build

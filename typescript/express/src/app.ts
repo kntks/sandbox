@@ -1,13 +1,13 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 
-import { RegisterRoutes } from "./.build/routes";
+import { RegisterRoutes } from "./build/routes";
 
 const app: express.Express = express();
 if (process.env.NODE_ENV === "dev") {
   app.use("/api/docs", swaggerUi.serve, async (req: express.Request, res: express.Response) => {
     return res.send(
-      swaggerUi.generateHTML(await import("./.build/swagger.json"))
+      swaggerUi.generateHTML(await import("./build/swagger.json"))
       );
     }
   )
