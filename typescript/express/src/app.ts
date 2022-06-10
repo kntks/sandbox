@@ -1,8 +1,6 @@
 import express from "express";
-import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-import employees from "routes/employees";
 import { RegisterRoutes } from "./.build/routes";
 
 const app: express.Express = express();
@@ -13,7 +11,6 @@ if (process.env.NODE_ENV === "dev") {
       );
     }
   )
-  // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(options)));
 }
 
 app.use(express.json());
