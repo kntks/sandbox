@@ -6,13 +6,14 @@
   "scripts": {
     "start": "node dist/app.js",
     "start:node-dev": "ts-node-dev -r tsconfig-paths/register --poll --exit-child --watch src src/index.ts",
-    "start:nodemon": "nodemon --watch src --ext ts --exec ts-node src/app.ts",
-    "dev": "concurrently \"nodemon --watch src --ext ts --exec ts-node src/app.ts\" \"nodemon -x tsoa spec-and-routes\"",
+    "start:nodemon": "nodemon",
+    "dev": "npm run tsoa && concurrently \"nodemon\" \"nodemon -w src/routes -x tsoa spec-and-routes\"",
     "test": "jest --coverage --passWithNoTests --runInBand",
     "build:swc": "swc src -d dist && tsc-alias -p tsconfig.json",
     "build:tsc": "tsc --noEmitOnError -p tsconfig.json && tsc-alias -p tsconfig.json",
     "build": "npm run tsoa && npm run build:prisma && npm run build:swc",
     "build:prisma": "prisma migrate deploy",
+    "lint": "tsc --noEmit && eslint './src/**/*.{js,ts}'",
     "lint:fix": "eslint --fix './src/**/*.{js,ts}' && prettier --write './src/**/*.{js,ts}'",
     "tsoa": "tsoa spec-and-routes"
   },
