@@ -18,3 +18,7 @@ export function validate(validations: ValidationChain[]) {
 export function validateDepartment(): ValidationChain {
   return query("department").optional().isIn(DepartmentNames).withMessage("department param is invalid value")
 }
+
+export function validateOffset(): ValidationChain {
+  return query("offset").not().isEmpty().withMessage("offset is required").isInt({gt: 0}).withMessage("offset must be Int and greater than 0")
+}

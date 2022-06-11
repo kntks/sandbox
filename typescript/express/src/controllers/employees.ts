@@ -16,7 +16,7 @@ import {
   Route,
   SuccessResponse,
 } from "tsoa";
-import { validate, validateDepartment } from "middlewares/validation";
+import { validate, validateDepartment, validateOffset } from "middlewares/validation";
 
 export async function ok(req: Request, res: Response) {
   return res.status(200).json("ok");
@@ -50,10 +50,10 @@ export async function getEmployeesController(
 
 @Route("employees")
 export class EmployeesController extends Controller {
-  @Middlewares(validate([validateDepartment()]))
+  @Middlewares(validate([validateDepartment(), validateOffset()]))
   @SuccessResponse("200", "OK")
   @Get()
-  public async get(@Query() offset: number, @Query() department?: string): Promise<{id: string, name: string}[]> {
+  public async get(@Query() offset: string, @Query() department?: string): Promise<{id: string, name: string}[]> {
     return [{
       id: "123",
       name: "hoge"
