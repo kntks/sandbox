@@ -28,10 +28,12 @@ $ npm install --save-dev tsc-alias
 }
 ```
 
-swaggerでAPIドキュメント自動生成
+tsoaを使ったopen API定義書自動生成
 ``` 
-$ npm i -D swagger-ui-express swagger-jsdoc @types/swagger-jsdoc @types/swagger-ui-express
+$ npm i -D swagger-ui-express @types/swagger-ui-express concurrently nodemon ts-node
 ```
+https://tsoa-community.github.io/docs/live-reloading.html#reloading-code
+
 
 jest 
 ```
@@ -143,10 +145,35 @@ mysql> select user,host,plugin from mysql.user;
 6 rows in set (0.01 sec)
 ```
 
+## Can't suppert 'refObject' type
+
+`@Qyery`や`@Path`はinterfaceやtypeを設定できないので、一つ一つ引数を設定する必要がある
+https://github.com/lukeautry/tsoa/issues/353
+
 # メモ
 必要そう
 https://zenn.dev/nori_k/articles/45399999ff39f2#prisma-client%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B
 
+## リクエストによって得られる情報はstringで受け取るようにする
+例えば、以下のようにcontrollerにメソッドを作成したとする。
+```ts
+get(@Query() offset: number)
+```
+`http://xxxx:3000/hoge?offset=1`にリクエストを投げたとき、tsoaによって自動生成された`getValidatedArgs`関数がvalidationをしてくれる。  
+そのため、`http://xxxx:3000/hoge?offset=stringValue`のように数字以外を渡した場合、以下のようにエラーが出る
+```
+ValidateError
+  at getValidatedArgs (/app/src/build/routes.ts:135:19)
+  at EmployeesController_get (/app/src/build/routes.ts:37:33)
+  at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+  at next (/app/node_modules/express/lib/router/route.js:144:13)
+  at /app/src/middlewares/validation.ts:12:14
+  at processTicksAndRejections (node:internal/process/task_queues:95:5)
+```
+しかし、今回りクエストによって得られる情報(body,pram,query)のvalidationはできる限り`express-validator`に任せたい。  
+理由として、APIを利用するクライアント側のエラーハンドリングが難しくなるから  
+
+そのため、コーディングする際にquery, paramに指定する型はstringにする
 
 ## expressに関するサイト
 
