@@ -1,9 +1,16 @@
 import prisma from "models/client";
 import { departments } from "const";
-import { DepartmentName, Employee } from "@types";
+import { DepartmentName } from "@types";
+
+export type Employee = {
+  empNo: number;
+  firstName: string;
+  lastName: string;
+};
 
 export async function getEmployees(
-  department: DepartmentName<typeof departments>
+  offset: number,
+  department?: DepartmentName<typeof departments>
 ): Promise<Employee[]> {
   //SELECT * FROM dept_emp WHERE dept_no="d001" AND to_date>=now();
   const employees = await prisma.dept_emp.findMany({
