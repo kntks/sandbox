@@ -20,8 +20,3 @@ type Department = {
 type DepartmentName<T extends ReadonlyArray<{ deptName: string }>> =
   T[number]["deptName"];
 
-type Employee = {
-  empNo: number;
-  firstName: string;
-  lastName: string;
-};

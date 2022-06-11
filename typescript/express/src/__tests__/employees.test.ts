@@ -15,7 +15,7 @@ describe("test employees", () => {
     ] as unknown as Prisma.Prisma__dept_empClient<dept_emp[]>;
     prismaMock.dept_emp.findMany.mockResolvedValue(employees);
 
-    await expect(getEmployees("marketing")).resolves.toEqual([
+    await expect(getEmployees(0, "marketing")).resolves.toEqual([
       {
         firstName: "a",
         lastName: "a",

@@ -7,7 +7,7 @@ services:
     volumes:
       - "./:/app"
     working_dir: /app
-    command: ["npm", "start"]
+    command: ["npm","run","dev"]
     ports:
       - "3000:3000"
     init: true
