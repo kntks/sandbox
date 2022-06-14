@@ -179,3 +179,4 @@ ValidateError
 
 - [🤺 Node.js + Expressの混沌を統治する 🤺](https://inside.estie.co.jp/entry/2020/09/17/090000)
 - https://github.com/MakingSense/tsoa-api/tree/master/src
+- [Jest・Supertestを使用したnode.js(Express)のAPIテスト　app.listen()はエラーになる](https://qiita.com/yuta-katayama-23/items/29b91fed629fe758a42d)
