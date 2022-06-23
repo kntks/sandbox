@@ -1,0 +1,8 @@
+site_name: My Test Docs
+nav:
+  - Home: index.md
+  - About: about.md
+  - Developer guide: developer_guide/index.md
+language: ja
+theme: material
+repo_url: https://github.com/kntks/sandbox
