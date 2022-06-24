@@ -16,15 +16,15 @@ theme:
         icon: material/toggle-switch 
         name: Switch to light mode
 
-repo_url: https://github.com/kntks/sandbox
-markdown_extensions:
-  - attr_list
-  - tables
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
+# repo_url: https://github.com/kntks/sandbox
+# markdown_extensions:
+#   - attr_list
+#   - tables
+#   - pymdownx.emoji:
+#       emoji_index: !!python/name:materialx.emoji.twemoji
+#       emoji_generator: !!python/name:materialx.emoji.to_svg
+#   - pymdownx.highlight:
+#       anchor_linenums: true
+#   - pymdownx.inlinehilite
+#   - pymdownx.snippets
+#   - pymdownx.superfences
