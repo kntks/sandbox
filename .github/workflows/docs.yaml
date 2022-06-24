@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     paths:
-      - 'docs/'
+      - 'docs/**/*.md'
     branches:
       - master 
       - main
