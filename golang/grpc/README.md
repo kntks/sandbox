@@ -1,9 +1,10 @@
-# build
+# start server
 ```
-$ docker compose run --rm protobuf
+$ docker compose up
 ```
 
-memo
+# buf
 ```
-$ buf generate proto/v1/sample.proto
+$ cd protobuf
+$ buf generate 
 ```
