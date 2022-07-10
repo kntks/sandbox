@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/sampleBB"
+              "$ref": "#/definitions/v1BB"
             }
           },
           "default": {
@@ -39,7 +39,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sampleAA"
+              "$ref": "#/definitions/v1AA"
             }
           }
         ],
@@ -77,7 +77,7 @@
         }
       }
     },
-    "sampleAA": {
+    "v1AA": {
       "type": "object",
       "properties": {
         "name": {
@@ -85,7 +85,7 @@
         }
       }
     },
-    "sampleBB": {
+    "v1BB": {
       "type": "object",
       "properties": {
         "name": {

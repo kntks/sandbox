@@ -1,5 +1,5 @@
 syntax = "proto3";
-package sample;
+package app.v1;
 
 option go_package = "github.com/kntks/sandbox/golang/grpc/gen/proto/go/app/v1";
 import "google/api/annotations.proto";

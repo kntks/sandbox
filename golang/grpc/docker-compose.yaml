@@ -1,19 +1,5 @@
 version: '3.9'
 services:
-  # protobuf:
-  #   build: .
-  #   volumes:
-  #     - "./:/go/src"
-  #   command: [
-  #     "protoc",
-  #     "-I=./proto",
-  #     "--go_out=./proto/go",
-  #     "--go-grpc_out=./proto/go",
-  #     "--go_opt=paths=source_relative",
-  #     "--go-grpc_opt=paths=source_relative", 
-  #     "proto/sample.proto"
-  #   ]
-
   app:
     build:
       context: .
@@ -51,3 +37,12 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 1s
       retries: 3
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/app/v1/sample.swagger.json
+    volumes:
+      - "./protobuf/gen/openapiv2/app:/app"
+    ports:
+      - "8080:8080"

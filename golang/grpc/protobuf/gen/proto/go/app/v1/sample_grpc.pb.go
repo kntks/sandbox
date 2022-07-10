@@ -32,7 +32,7 @@ func NewHogeClient(cc grpc.ClientConnInterface) HogeClient {
 
 func (c *hogeClient) AtoB(ctx context.Context, in *AA, opts ...grpc.CallOption) (*BB, error) {
 	out := new(BB)
-	err := c.cc.Invoke(ctx, "/sample.Hoge/AtoB", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/app.v1.Hoge/AtoB", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (c *hogeClient) AtoB(ctx context.Context, in *AA, opts ...grpc.CallOption) 
 }
 
 func (c *hogeClient) AtoBstream(ctx context.Context, opts ...grpc.CallOption) (Hoge_AtoBstreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Hoge_ServiceDesc.Streams[0], "/sample.Hoge/AtoBstream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Hoge_ServiceDesc.Streams[0], "/app.v1.Hoge/AtoBstream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func _Hoge_AtoB_Handler(srv interface{}, ctx context.Context, dec func(interface
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/sample.Hoge/AtoB",
+		FullMethod: "/app.v1.Hoge/AtoB",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HogeServer).AtoB(ctx, req.(*AA))
@@ -150,7 +150,7 @@ func (x *hogeAtoBstreamServer) Recv() (*AA, error) {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Hoge_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sample.Hoge",
+	ServiceName: "app.v1.Hoge",
 	HandlerType: (*HogeServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

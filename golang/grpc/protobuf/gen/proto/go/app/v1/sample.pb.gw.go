@@ -121,7 +121,7 @@ func RegisterHogeHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/sample.Hoge/AtoB", runtime.WithHTTPPathPattern("/v1/example/echo"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/app.v1.Hoge/AtoB", runtime.WithHTTPPathPattern("/v1/example/echo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -191,7 +191,7 @@ func RegisterHogeHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/sample.Hoge/AtoB", runtime.WithHTTPPathPattern("/v1/example/echo"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/app.v1.Hoge/AtoB", runtime.WithHTTPPathPattern("/v1/example/echo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -212,7 +212,7 @@ func RegisterHogeHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/sample.Hoge/AtoBstream", runtime.WithHTTPPathPattern("/sample.Hoge/AtoBstream"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/app.v1.Hoge/AtoBstream", runtime.WithHTTPPathPattern("/app.v1.Hoge/AtoBstream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -234,7 +234,7 @@ func RegisterHogeHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 var (
 	pattern_Hoge_AtoB_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "example", "echo"}, ""))
 
-	pattern_Hoge_AtoBstream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"sample.Hoge", "AtoBstream"}, ""))
+	pattern_Hoge_AtoBstream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"app.v1.Hoge", "AtoBstream"}, ""))
 )
 
 var (
