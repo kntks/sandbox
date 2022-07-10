@@ -1,0 +1,23 @@
+syntax = "proto3";
+package sample;
+
+option go_package = "github.com/kntks/sandbox/golang/grpc/gen/proto/go/app/v1";
+import "google/api/annotations.proto";
+
+service Hoge {
+  rpc AtoB (AA) returns (BB) {
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+        body: "*"
+      };
+  }
+  rpc AtoBstream (stream AA) returns (stream BB) {}
+}
+
+message AA {
+  string name = 1;
+}
+
+message BB {
+  string name = 1;
+}
