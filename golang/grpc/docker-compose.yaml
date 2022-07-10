@@ -1,15 +1,53 @@
 version: '3.9'
 services:
-  protobuf:
-    build: .
+  # protobuf:
+  #   build: .
+  #   volumes:
+  #     - "./:/go/src"
+  #   command: [
+  #     "protoc",
+  #     "-I=./proto",
+  #     "--go_out=./proto/go",
+  #     "--go-grpc_out=./proto/go",
+  #     "--go_opt=paths=source_relative",
+  #     "--go-grpc_opt=paths=source_relative", 
+  #     "proto/sample.proto"
+  #   ]
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
     volumes:
       - "./:/go/src"
-    command: [
-      "protoc",
-      "-I=./proto",
-      "--go_out=./proto/go",
-      "--go-grpc_out=./proto/go",
-      "--go_opt=paths=source_relative",
-      "--go-grpc_opt=paths=source_relative", 
-      "proto/sample.proto"
-    ]
+    command: ["air", "-c", "./air.toml"]
+    ports:
+      - "7100:7100"
+      - "7090:7090"
+    init: true
+    environment: {}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      # MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}  
+      # MYSQL_DATABASE: ${DB_DATABASE}
+      # MYSQL_USER: ${DB_USER}
+      # MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:  
+      - ./mysql/data:/var/lib/mysql
+      # - ./mysql/initdb.d:/docker-entrypoint-initdb.d # test_dbを使用するので、必要ない
+      - ./mysql/log:/var/log/mysql
+      - ./mysql/cnf:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 1s
+      retries: 3

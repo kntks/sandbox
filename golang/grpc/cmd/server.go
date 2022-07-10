@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -25,27 +26,25 @@ func (s *server) AtoB(ctx context.Context, in *pb.AA) (*pb.BB, error) {
 	return &pb.BB{Name: "hello world"}, nil
 }
 
+const grpcPort = "7100"
+const gwPort = "7090"
+
 func main() {
 	// Create a listener on TCP port
-	lis, err := net.Listen("tcp", ":8080")
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", grpcPort))
 	if err != nil {
 		log.Fatalln("Failed to listen:", err)
 	}
 
-	// Create a gRPC server object
 	s := grpc.NewServer()
-	// Attach the Greeter service to the server
 	pb.RegisterHogeServer(s, &server{})
-	// Serve gRPC server
-	log.Println("Serving gRPC on 0.0.0.0:8080")
+	log.Printf("Serving gRPC on 0.0.0.0:%s", grpcPort)
 	go func() {
 		log.Fatalln(s.Serve(lis))
 	}()
-	// Create a client connection to the gRPC server we just started
-	// This is where the gRPC-Gateway proxies the requests
 	conn, err := grpc.DialContext(
 		context.Background(),
-		"0.0.0.0:8080",
+		fmt.Sprintf("0.0.0.0:%s", grpcPort),
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -54,17 +53,16 @@ func main() {
 	}
 
 	gwmux := runtime.NewServeMux()
-	// Register Greeter
 	err = pb.RegisterHogeHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		log.Fatalln("Failed to register gateway:", err)
 	}
 
 	gwServer := &http.Server{
-		Addr:    ":8090",
+		Addr:    fmt.Sprintf(":%s", gwPort),
 		Handler: gwmux,
 	}
 
-	log.Println("Serving gRPC-Gateway on http://0.0.0.0:8090")
+	log.Printf("Serving gRPC-Gateway on http://0.0.0.0:%s", gwPort)
 	log.Fatalln(gwServer.ListenAndServe())
 }
