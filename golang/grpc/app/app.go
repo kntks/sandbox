@@ -7,7 +7,7 @@ import (
 	"net"
 	"net/http"
 
-	pb "grpc/gen/go/proto/v1"
+	pb "grpc/protobuf/gen/proto/go/app/v1"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"

@@ -166,5 +166,5 @@ var Hoge_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "app/sample.proto",
+	Metadata: "app/v1/sample.proto",
 }
