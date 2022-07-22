@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   grafana:
-    image: grafana/grafana:8.3.3
+    image: grafana/grafana:9.0.0
     container_name: grafana
     ports:
       - 3000:3000
@@ -14,9 +14,9 @@ services:
       - type: bind
         source: ./provisioning/dashboards
         target: /etc/grafana/provisioning/dashboards
-      - type: bind
-        source: ./provisioning/notifiers
-        target: /etc/grafana/provisioning/notifiers
+      # - type: bind
+      #   source: ./provisioning/notifiers
+      #   target: /etc/grafana/provisioning/notifiers
       - type: bind
         source: ./dashboards
         target: /var/lib/grafana/dashboards/default
@@ -44,14 +44,14 @@ services:
       - "9080:9080"
     command: -config.file=/etc/promtail/config.yml
 
-  alertmanager:
-    image: prom/alertmanager
-    container_name: alertmanager
-    command:
-      - '--config.file=/etc/alertmanager/config.yaml'
-      - '--storage.path=/alertmanager'
-    volumes:
-      - ./alertmanager:/etc/alertmanager
-    ports:
-      - 9093:9093
+  # alertmanager:
+  #   image: prom/alertmanager
+  #   container_name: alertmanager
+  #   command:
+  #     - '--config.file=/etc/alertmanager/config.yaml'
+  #     - '--storage.path=/alertmanager'
+  #   volumes:
+  #     - ./alertmanager:/etc/alertmanager
+  #   ports:
+  #     - 9093:9093
 

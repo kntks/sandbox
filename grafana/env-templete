@@ -9,3 +9,9 @@ GF_SECURITY_ADMIN_PASSWORD=test
 
 # [log]
 GF_LOG_LEVEL=debug
+
+# [unified_alerting]
+GF_UNIFIED_ALERTING_ENABLED=true
+
+# [alert]
+GF_ALERTING_ENABLED=false
