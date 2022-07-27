@@ -1,5 +1,5 @@
 import { prismaMock } from "./singleton";
-import { getEmployees } from "models/employees";
+import { getEmployees } from "repositories/employees";
 import { dept_emp, Prisma } from "@prisma/client";
 
 describe("test employees", () => {

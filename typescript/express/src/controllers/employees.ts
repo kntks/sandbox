@@ -1,6 +1,6 @@
-import prisma from "models/client";
+import prisma from "repositories/client";
 import { Request, Response } from "express";
-import { getEmployees, type Employee } from "models/employees";
+import { getEmployees, type Employee } from "repositories/employees";
 
 import {
   Body,

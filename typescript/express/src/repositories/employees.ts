@@ -1,4 +1,4 @@
-import prisma from "models/client";
+import prisma from "repositories/client";
 import { departments } from "const";
 import { DepartmentName } from "@types";
 
