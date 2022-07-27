@@ -4,9 +4,23 @@
   "controllerPathGlobs": ["src/controllers/*.ts"],
   "spec": {
     "outputDirectory": "src/build",
-    "specVersion": 3
+    "specVersion": 3,
+    "securityDefinitions": {
+      "sessionId": {
+        "type": "apiKey",
+        "name": "sid",
+        "in": "cookie"
+      },
+      "accessToken": {
+        "type": "http",
+        "name": "access_token",
+        "in": "header",
+        "scheme": "bearer"
+      }
+    }
   },
   "routes": {
-    "routesDir": "src/build"
+    "routesDir": "src/build",
+    "authenticationModule": "./src/middlewares/auth.ts"
   }
 }

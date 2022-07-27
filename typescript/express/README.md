@@ -180,3 +180,43 @@ ValidateError
 - [🤺 Node.js + Expressの混沌を統治する 🤺](https://inside.estie.co.jp/entry/2020/09/17/090000)
 - https://github.com/MakingSense/tsoa-api/tree/master/src
 - [Jest・Supertestを使用したnode.js(Express)のAPIテスト　app.listen()はエラーになる](https://qiita.com/yuta-katayama-23/items/29b91fed629fe758a42d)
+
+
+## Open APIとSwagger UI
+
+### [Cookie Authentication](https://swagger.io/docs/specification/authentication/cookie-authentication/)
+Swagger UIでは"try it out"のボタンでCookieをheaderにつけてリクエストを送信できない。しかし、securitySchemesを設定するとheaderを設定できる
+
+↓を読んだ方が早い
+https://swagger.io/docs/specification/authentication/
+
+specificationに以下の記述があればheaderがつく
+```json
+{
+  "components": {
+    "securitySchemes": {
+			"sessionId": {
+				"type": "apiKey",
+				"name": "sid",
+				"in": "cookie"
+			},
+			"accessToken": {
+				"type": "http",
+				"name": "access_token",
+				"in": "header",
+				"scheme": "bearer"
+			}
+		}
+  }
+}
+
+"security": [
+  {
+    "accessToken": []
+  },
+  {
+    "sessionId": []
+  }
+],
+
+```
