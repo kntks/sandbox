@@ -182,6 +182,15 @@ ValidateError
 - [Jest・Supertestを使用したnode.js(Express)のAPIテスト　app.listen()はエラーになる](https://qiita.com/yuta-katayama-23/items/29b91fed629fe758a42d)
 
 
+## Authorization
+
+`@Security()`のデコレーションを使用する
+
+```ts
+@Security({'publicAccess': [], 'accessToken': []})
+```
+https://github.com/lukeautry/tsoa/issues/839#issuecomment-755271832
+
 ## Open APIとSwagger UI
 
 ### [Cookie Authentication](https://swagger.io/docs/specification/authentication/cookie-authentication/)
