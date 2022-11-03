@@ -20,7 +20,9 @@ var conf2 embed.FS
 func example1(conf []byte) {
 	viper.SetConfigType("yaml") // or viper.SetConfigType("YAML")
 
-	viper.ReadConfig(bytes.NewBuffer(conf))
+	if err := viper.ReadConfig(bytes.NewBuffer(conf)); err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println(viper.Get("hoge"))
 	fmt.Println(viper.GetStringMap("clothing"))
@@ -40,6 +42,10 @@ func example2(f fs.ReadFileFS) {
 	fmt.Println(viper.Get("hoge"))
 	fmt.Println(viper.GetStringMap("clothing"))
 }
+
 func main() {
+	fmt.Println("======= embed []byte ======")
+	example1(conf1)
+	fmt.Println("======= embed FS ======")
 	example2(conf2)
 }
