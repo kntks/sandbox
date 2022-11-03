@@ -59,6 +59,12 @@ PASS
 go run cmd/mutex/main.go 
 ```
 
+# terminal package
+```
+$ go run cmd/terminal/main.go
+```
+
+
 ## gin server with Jwt
 
 ### start
