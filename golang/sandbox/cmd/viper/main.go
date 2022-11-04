@@ -35,6 +35,7 @@ func example2(f fs.ReadFileFS) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer file.Close()
 	if err := viper.ReadConfig(file); err != nil {
 		log.Fatal(err)
 	}
