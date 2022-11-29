@@ -1,0 +1,5 @@
+---
+- hosts: all
+  roles:
+    - role: example
+      when: ( lookup('env','SOURCE_RELEASE_VERSION') | split('-') | first ) is version('1.24', '>=')

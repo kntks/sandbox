@@ -1,0 +1,29 @@
+- hosts: all
+  tasks:
+  - name: debug
+    vars:
+      source_release_version: "1.22.15-20221112"
+    debug:
+      msg: "{{ source_release_version }} はバージョン1.24未満" 
+    when: ( source_release_version | split('-') | first ) is version('1.24.0', '<')
+
+  - name: debug
+    vars:
+      source_release_version: 1.23.13-20221112
+    debug:
+      msg: "{{ source_release_version }} はバージョン1.24未満" 
+    when: ( source_release_version | split('-') | first ) is version('1.24.0', '<')
+
+  - name: debug
+    vars:
+      source_release_version: 1.24.7-20221112
+    debug:
+      msg: "{{ source_release_version }} はバージョン1.24以上" 
+    when: ( source_release_version | split('-') | first ) is version('1.24.0', '<')
+
+  - name: debug
+    vars:
+      source_release_version: 1.25.0-20990101
+    debug:
+      msg: "{{ source_release_version }} はバージョン1.24以上" 
+    when: ( source_release_version | split('-') | first ) is version('1.24.0', '<')
