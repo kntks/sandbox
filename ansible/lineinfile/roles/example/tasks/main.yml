@@ -1,0 +1,14 @@
+- name: copy /etc/containerd/config.toml
+  copy:
+    src: config.toml
+    dest: roles/example/files/dest.toml
+  
+- name: lineinfile
+  vars:
+    # https://kubernetes.io/ja/docs/concepts/configuration/manage-resources-containers/#setting-requests-and-limits-for-local-ephemeral-storage
+    line_size_ki: 32   # KiB
+  lineinfile:
+    path: roles/example/files/dest.toml
+    regexp: '^(\s*)max_container_log_line_size.*'
+    line: '\1max_container_log_line_size = {{ ( line_size_ki * 1024 ) }}'
+    backrefs: true
