@@ -3,18 +3,19 @@ dockerを利用したfluentd勉強用のサンドボックス
 
 https://github.com/fluent/fluentd-docker-image#providing-your-own-configuration-file-and-additional-options
 
-## Usage
-### docker compose
+
+# Usage
+## docker compose
  
 ```bash
 cp env-template .env
 ```
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
-how to switch config file?
+## how to switch config file?
 
 ```bash
 # .env
@@ -22,7 +23,31 @@ how to switch config file?
 FLUENTD_CONF=fluent.conf
 ```
 
-### docker cli
+## how to reload conifig
+
+find PID
+```
+$ docker compose exec fluentd ps           
+PID   USER     TIME  COMMAND
+    1 fluent    0:12 {tini} /usr/bin/qemu-x86_64 /sbin/tini -- /bin/entrypoint.sh fluentd
+    9 fluent    1:14 {fluentd} /usr/bin/qemu-x86_64 /usr/bin/ruby /usr/bin/fluentd -c /fluentd/etc/docker-log.con
+   29 fluent    1:18 {ruby} /usr/bin/qemu-x86_64 /usr/bin/ruby -Eascii-8bit:ascii-8bit /usr/bin/fluentd -c /fluen
+   49 fluent    0:00 /bin/ps
+```
+
+reload PID:9 
+```
+$ docker compose exec fluentd fluent-ctl reload 9
+```
+
+## how to install plugin
+edit Dockerfile
+
+```
+$ docker compose up --build
+```
+
+## docker cli
 default: fluentd/etc/fluent.conf
 
 ```bash
@@ -30,10 +55,10 @@ docker run -ti --rm -p 24224:24224 --name fluentd-sandbox --mount type=bind,sour
 ```
 https://docs.fluentd.org/configuration/config-file#docker
 
-### Into a running container
+## Into a running container
 ```bash
 # docker-compose
-docker-compose exec fluentd  /bin/sh 
+docker compose exec fluentd  /bin/sh 
 
 # docker cli
 docker exec -it fluentd-sandbox /bin/sh
@@ -43,13 +68,13 @@ docker exec -it fluentd-sandbox /bin/sh
 
 ```
 chmod +x entrypoint.sh
-docker-compose build --no-cache
-docker-compose up
+docker compose build --no-cache
+docker compose up
 ```
 
-## Example
+# Example
 
-### fluentd/etc/intput-http.conf
+## fluentd/etc/intput-http.conf
 input
 ```bash
 curl -X POST -d @data/input1.log  http://localhost:24224
@@ -64,7 +89,7 @@ output
 fluentd_1  | 2021-02-12 02:43:01.162710800 +0000 : {"test":"data"}
 ```
 
-### fluentd/etc/output-file.conf
+## fluentd/etc/output-file.conf
 
 input
 ```bash
@@ -78,7 +103,7 @@ fluentd/log/buffer.xxxx.log
 2021-01-16T04:56:31+00:00		{"test":"data"}
 ```
 
-### fluentd/etc/input-tail.conf
+## fluentd/etc/input-tail.conf
 
 data/input2.log
 ```
@@ -95,7 +120,7 @@ output
 2021-01-16T05:21:08+00:00	tail.log	{"test":"hoge","name":"xxxxx","age":20}
 ```
 
-### fluentd/etc/filter-record_transformer.conf
+## fluentd/etc/filter-record_transformer.conf
 
 data/input3.log
 ```
@@ -112,7 +137,7 @@ output
 2021-01-16 06:03:40.621452069 +0000 : {"test":"hoge"}
 ```
 
-### fluentd/etc/out-cloudwatch-logs.conf
+## fluentd/etc/out-cloudwatch-logs.conf
 
 set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`  
 
@@ -129,9 +154,9 @@ output
 AWS console  
 CloudWatch > CloudWatch Logs > Log groups > test-log-group-name
 
-## Plugin
+# Plugin
 
-### list plugin
+## list plugin
 ```bash
 fluent-gem list
 ```

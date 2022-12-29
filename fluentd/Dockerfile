@@ -6,11 +6,14 @@ USER root
 
 RUN apk add --no-cache --update --virtual .build-deps \
   sudo build-base ruby-dev && \
-  sudo gem install \
+  sudo gem install --no-document \
   fluent-plugin-elasticsearch \
   fluent-plugin-cloudwatch-logs \
   fluent-plugin-s3 \
   fluent-plugin-kinesis \
+  fluent-plugin-parser-cri \
+  fluent-plugin-kubernetes_metadata_filter \
+  fluent-plugin-concat \
   && sudo gem sources --clear-all \
   && apk del .build-deps \
   && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
