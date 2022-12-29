@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  tes-server:
+    build:
+      context: . 
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/go/src"
+    command: ["air", "-c", ".air.toml"]
+    ports:
+      - "8000:8000"
+    
