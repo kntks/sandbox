@@ -1,4 +1,4 @@
-package sql
+package main
 
 import (
 	"fmt"
@@ -15,10 +15,10 @@ type Customer struct {
 	UpdatedAt time.Time
 }
 
-func Main() {
+func main() {
 	user := "docker"
 	pass := "docker"
-	host := "db"
+	host := "localhost"
 	dbname := "test_database"
 	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", user, pass, host, dbname)
 	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
